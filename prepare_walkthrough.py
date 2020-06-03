@@ -70,13 +70,17 @@ def lemmatize(df, col):
     return df
 
 
-def remove_stopwords(df, col):
+def remove_stopwords(df, col, extra_words=[]):
     '''
-    This function takes in a df and a string for column name and 
-    returns the df with a new column named 'clean' with stopwords removed.
+    This function takes in a df and a string for column name, optional extra_words parameter
+    if you want to add extra stopwords and returns the df with a new column 
+    named 'clean' with stopwords removed.
     '''
     # Create stopword_list
     stopword_list = stopwords.words('english')
+
+    # Add optional additional stopwords
+    stopword_list.extend(extra_words)
     
     # Split words in column
     words = df[col].str.split()
